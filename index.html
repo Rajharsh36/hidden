@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hidden</title>
+		<link rel="shortcut icon" type="image/x-icon" href="icon.png"/>
+	</head>
+	
+	<body>
+		<style>
+			.result{
+				background-color:white;
+				
+				
+				width:60px;
+				margin-top:10px;
+				margin-left:10px;
+				text-align:center;
+				padding-top:15px;
+				height:60px;
+				border-radius:5px;
+				color:balck;
+			
+			}
+			#orange{
+				background-color:orange;
+				color:"orange";
+				
+			}
+			#white{
+				background-color:white;
+				color:"white";
+				
+			}
+			#green{
+				background-color:green;
+				color:"orange";
+				
+			}
+			#main2{
+				display:flex;
+				flex-wrap:wrap;
+				margin-top:20px;
+				
+				
+			}
+			#main3{
+				display:flex;
+				flex-wrap:wrap;
+				text-align:center;
+			}
+			
+			.color_bt{
+				margin-left:10px;
+				height:40px;
+				width:60px;
+				border-radius:5px;
+				
+			}
+			#main{
+				display:flex;
+				flex-direction:column;
+				
+				align-item:center;
+				
+			}
+			
+			body{
+				width:100vw;
+				height:100vh;
+				display:flex;
+				flex-direction:column;
+				justify-content:center;
+				align-item:center;
+				background-color:rgb(18,19,37);
+			}
+			#check{
+					
+				height:50px;
+				width:60vw;
+			
+				display:block;
+				margin-left:20vw;
+				margin-top:60px;
+				background-color:rgb(47,255,54);
+				border-radius:10px;
+			}
+			
+		</style>
+		
+		<div id="main">
+			
+			<span style="margin-left:5vw;margin-bottom:40px;"><span style="color:white;">Scrore: </span><span  style="color:white;" id="score">0</span></span>
+			
+			<div id="main3">
+				<button class="color_bt" id="orange" onclick="selectcolor('orange')">orange</button>
+				<button class="color_bt" id="white" onclick="selectcolor('white')">white</button>
+				<button class="color_bt" id="green" onclick="selectcolor('green')"> green</button>
+			</div>
+			<div id="main2">
+				<button id="1r" class="result" onclick="selectbt(1)">1</button> 
+				<button id="2r" class="result" onclick="selectbt(2)">2</button> 
+				<button id="3r" class="result" onclick="selectbt(3)">3</button> 
+				<button id="4r" class="result" onclick="selectbt(4)">4</button> 
+				<button id="5r" class="result" onclick="selectbt(5)">5</button> 
+				<button id="6r" class="result" onclick="selectbt(6)">6</button> 
+				<button id="7r" class="result" onclick="selectbt(7)">7</button> 
+				<button id="8r" class="result" onclick="selectbt(8)">8</button> 
+				<button id="9r" class="result" onclick="selectbt(9)">9</button> 
+			</div>
+			<button id="check" onclick="restart()">restart</button>
+		</div>
+		<script>
+			
+			let selected = {};
+			
+			let orange= document.getElementById("orange");
+			let white= document.getElementById("white");
+			let green= document.getElementById("green");
+			orange.disabled=true;
+			white.disabled=true;
+			green.disabled=true;
+			let selected_bt=1;
+			let no_of_selected =0;
+			let result ={};
+			let score = 0
+			let choices = ["green", "orange" , "white"];
+			
+			
+				
+			for ( let i=0; i<9;i++){
+				let index = Math.random()*3
+				index = Number.parseInt(index)
+				result[i+1]=choices[index]
+				
+			}
+				
+			
+			function selectbt(id){
+				let bt1= document.getElementById(`${id}r`);
+				
+				orange.disabled=false;
+				white.disabled=false;
+				green.disabled=false;
+				
+				selected_bt=id
+				
+				
+				
+			}
+			function selectcolor(bt){
+				selected[selected_bt]=bt
+			
+				orange.disabled=true;
+				white.disabled=true;
+				green.disabled=true;
+				
+				
+				let bt1= document.getElementById(`${selected_bt}r`);
+				
+				
+				bt1.disabled=true;
+				no_of_selected ++
+				
+				if(result[selected_bt]==bt){
+					bt1.style.backgroundColor=bt;
+					score++
+					let scoretag= document.getElementById("score");
+					scoretag.textContent=score
+					if(bt=="green"){
+						bt1.style.color="white";
+					
+					}
+					
+				}
+				else{
+					bt1.style.backgroundColor="red";
+				}
+				
+			}
+			function restart(){
+				score=0
+				let scoretag= document.getElementById("score");
+				scoretag.textContent=score
+				for (let i=0;i<9;i++){
+					let bt1= document.getElementById(`${i+1}r`);
+					bt1.disabled=false;
+					bt1.style.backgroundColor="white"
+					bt1.style.color="black"
+					
+					
+				}
+				
+				
+				
+			}
+			
+		</script>
+	</body>
+</html>
